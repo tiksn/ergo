@@ -1,4 +1,4 @@
-certifi==2018.1.18
+certifi==2024.2.2
 chardet==5.2.0
 idna==2.6
 pkginfo==1.4.1
