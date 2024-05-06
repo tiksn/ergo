@@ -12,9 +12,11 @@ administrator_role_name = 'administrator'
 
 def main():
     parser = ArgumentParser(prog='cli')
-    parser.add_argument('name', help="The user's name.")
+    parser.add_argument('api_key', help="FusionAuth API Key.")
+    parser.add_argument('key_master_id', help="FusionAuth Key Master ID.")
     args = parser.parse_args()
-    print("Hello, %s!" % args.name)
+    print("Hello, %s!" % args.api_key)
+    print("Hello, %s!" % args.key_master_id)
 
     companies = generate_fake_companies()
 
