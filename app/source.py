@@ -1,4 +1,5 @@
 import re
+import uuid
 
 from faker import Faker
 from faker.providers import company
@@ -11,7 +12,7 @@ def generate_fake_companies():
     Faker.seed(693013693)
     companies = {}
     for company_index in range(fake.random_int(10, 15)):
-        company_id = fake.uuid4()
+        company_id = uuid.UUID(fake.uuid4())
         company_name = fake.company()
 
         company_host_main_domain = re.sub(r"[^a-zA-Z0-9]+", "", company_name).lower()
@@ -26,8 +27,13 @@ def generate_fake_companies():
 
         logging.info(f"{{{company_id}}} {company_name}")
 
-        for employee_index in range(fake.random_int(company_index * 2 + 1, company_index * 8 + 1)):
-            employee_id = fake.uuid4()
+        employee_indices = range(fake.random_int(company_index * 2 + 1, company_index * 8 + 1))
+        for employee_index in employee_indices:
+            employee_id = uuid.UUID(fake.uuid4())
+
+            is_first_employee = employee_index == 0
+            is_first_10percent_employee = (employee_index + 1) <= (len(employee_indices) / 10)
+            is_administrator = is_first_employee or is_first_10percent_employee
 
             is_male = fake.boolean()
 
@@ -56,6 +62,7 @@ def generate_fake_companies():
                 "id": employee_id,
                 "username": employee_username,
                 "email": employee_email,
+                "is_administrator": is_administrator,
                 "mobile_phone": employee_mobile_phone,
                 "first_name": employee_first_name,
                 "middle_name": employee_middle_name,
