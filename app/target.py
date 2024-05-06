@@ -19,8 +19,8 @@ def populate_target(api_key: str, companies, origins, personas):
     for _, company in companies.items():
         create_or_update_tenant(client, company, main_key_id)
 
+    for _, company in companies.items():
         client.set_tenant_id(str(company['id']))
-
         administrator_role_ids = []
 
         for application_name in application_names:
@@ -35,6 +35,9 @@ def populate_target(api_key: str, companies, origins, personas):
             group_id = uuid.uuid5(company['id'], f"group-{group_name}")
 
             create_or_update_group(client, group_id, group_name, administrator_role_ids)
+
+    for _, company in companies.items():
+        client.set_tenant_id(str(company['id']))
 
         for _, employee in company['employees'].items():
             create_or_update_user(client, company['id'], employee)
