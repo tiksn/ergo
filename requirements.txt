@@ -8,3 +8,4 @@ tqdm==4.66.4
 twine==5.0.0
 urllib3==2.2.1
 Faker==25.0.1
+fusionauth-client==1.50.0
