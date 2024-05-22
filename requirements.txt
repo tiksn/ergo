@@ -2,7 +2,7 @@ certifi==2024.2.2
 chardet==5.2.0
 idna==3.7
 pkginfo==1.10.0
-requests==2.32.1
+requests==2.32.2
 requests-toolbelt==1.0.0
 tqdm==4.66.4
 twine==5.1.0
