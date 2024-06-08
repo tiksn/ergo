@@ -15,7 +15,45 @@ def main():
     api_key = args.api_key
 
     companies = generate_fake_companies()
-    populate_target(api_key, companies, None, None)
+    applications = {
+        'Fossa': {
+            'Web': {
+                'RedirectURLs': [
+                    'http://127.0.0.1/web-app',
+                ]
+            },
+            'Native': {
+                'RedirectURLs': [
+                    'http://127.0.0.1/native-app',
+                ]
+            },
+        },
+        'Verdant': {
+            'Web': {
+                'RedirectURLs': [
+                    'http://127.0.0.1/web-app',
+                ]
+            },
+            'Native': {
+                'RedirectURLs': [
+                    'http://127.0.0.1/native-app',
+                ]
+            },
+        },
+        'Yabby': {
+            'Web': {
+                'RedirectURLs': [
+                    'http://127.0.0.1/web-app',
+                ]
+            },
+            'Native': {
+                'RedirectURLs': [
+                    'http://127.0.0.1/native-app',
+                ]
+            },
+        },
+    }
+    populate_target(api_key, companies, applications)
 
 
 if __name__ == '__main__':

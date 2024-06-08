@@ -1,15 +1,13 @@
 import logging
-import re
 import uuid
 
 from fusionauth.fusionauth_client import FusionAuthClient
 
 
-def populate_target(api_key: str, companies, origins, personas):
+def populate_target(api_key: str, companies, applications):
     client = FusionAuthClient(api_key, 'https://sandbox.fusionauth.io/')
 
     group_names = ['Administrators']
-    application_names = ['Fossa', 'Verdant', 'Yabby']
     administrator_role_name = 'administrator'
     main_key_id = uuid.UUID('a3aee1ec-c965-4ec8-97b2-c0245bc1c5ec')
     main_key_name = 'MainKey'
@@ -23,13 +21,21 @@ def populate_target(api_key: str, companies, origins, personas):
         client.set_tenant_id(str(company['id']))
         administrator_role_ids = []
 
-        for application_name in application_names:
-            application_id = uuid.uuid5(company['id'], f"application-{application_name}")
-            administrator_role_id = uuid.uuid5(application_id, f"role-{administrator_role_name}")
-            administrator_role_ids.append(str(administrator_role_id))
+        for application_name, idioms in applications.items():
+            for idiom_name, idiom_info in idioms.items():
+                application_id = uuid.uuid5(company['id'], f"application-{application_name}-{idiom_name}")
+                administrator_role_id = uuid.uuid5(application_id, f"role-{administrator_role_name}")
+                administrator_role_ids.append(str(administrator_role_id))
 
-            create_or_update_application(client, company, application_id, application_name, administrator_role_id,
-                                         administrator_role_name)
+                create_or_update_application(
+                    client,
+                    company,
+                    application_id,
+                    application_name,
+                    idiom_name,
+                    idiom_info,
+                    administrator_role_id,
+                    administrator_role_name)
 
         for group_name in group_names:
             group_id = uuid.uuid5(company['id'], f"group-{group_name}")
@@ -42,10 +48,11 @@ def populate_target(api_key: str, companies, origins, personas):
         for _, employee in company['employees'].items():
             create_or_update_user(client, company['id'], employee)
 
-            for application_name in application_names:
-                application_id = uuid.uuid5(company['id'], f"application-{application_name}")
+            for application_name, idioms in applications.items():
+                for idiom_name, idiom_info in idioms.items():
+                    application_id = uuid.uuid5(company['id'], f"application-{application_name}-{idiom_name}")
 
-                create_or_update_registration(client, company['id'], employee['id'], application_id)
+                    create_or_update_registration(client, company['id'], employee['id'], application_id)
 
             for group_name in group_names:
                 group_id = uuid.uuid5(company['id'], f"group-{group_name}")
@@ -168,24 +175,27 @@ def create_or_update_application(client: FusionAuthClient,
                                  company,
                                  application_id: uuid.UUID,
                                  application_name: str,
+                                 idiom_name: str,
+                                 idiom_info: dict,
                                  administrator_role_id: uuid.UUID,
                                  administrator_role_name: str):
+    application_display_name = f"{application_name} ({idiom_name})"
+    redirectURLs = idiom_info['RedirectURLs']
+
     application_request = {
         'application': {
             'tenantId': str(company['id']),
-            'name': application_name,
+            'name': application_display_name,
             'roles': [
                 {
                     'id': str(administrator_role_id),
                     'name': administrator_role_name,
-                    'description': f"'{administrator_role_name}' for '{application_name}'",
+                    'description': f"'{administrator_role_name}' for '{application_name}' for '{idiom_name}'",
                     'isSuperRole': True,
                 }
             ],
             'oauthConfiguration': {
-                'authorizedRedirectURLs': [
-                    'http://127.0.0.1/sample-wpf-app',
-                ],
+                'authorizedRedirectURLs': redirectURLs,
                 'generateRefreshTokens': True,
                 'proofKeyForCodeExchangePolicy': 'Required',
                 'enabledGrants': ['authorization_code', 'refresh_token'],
