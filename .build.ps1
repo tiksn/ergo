@@ -160,7 +160,7 @@ Task RestorePackages Clean, {
 }
 
 # Synopsis: Clean previous build leftovers
-Task Clean ActivateVirtualEnv, {
+Task Clean Init, ActivateVirtualEnv, {
     Get-ChildItem -Directory
     | Where-Object { -not $_.Name.StartsWith('.') }
     | ForEach-Object { Get-ChildItem -Path $_ -Recurse -Directory }
@@ -179,7 +179,7 @@ Task ActivateVirtualEnv CreateVirtualEnv, {
 }
 
 # Synopsis: Create Virtual Environment
-Task CreateVirtualEnv Init, {
+Task CreateVirtualEnv -If { -not (Test-Path -Path .env) } Init, {
     Exec { pip install virtualenv }
     Exec { virtualenv .env }
 }
