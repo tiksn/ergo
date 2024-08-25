@@ -28,6 +28,14 @@ param(
 
 Set-StrictMode -Version Latest
 
+task Start {
+    Exec { docker compose up --detach --wait }
+}
+
+task Stop {
+    Exec { docker compose down --volumes }
+}
+
 # Synopsis: Publish Docker images
 Task Publish Pack, {
     $state = Import-Clixml -Path ".\.trash\$Instance\state.clixml"
