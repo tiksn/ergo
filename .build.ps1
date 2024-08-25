@@ -144,7 +144,6 @@ Task RestorePackages Clean, {
         .\.env\Scripts\activate.ps1
     }
     elseif ($IsLinux) {
-        Exec { ls .env -R -a }
         Exec { .\.env\bin\activate.ps1 }
     }
 
@@ -167,7 +166,6 @@ Task ActivateVirtualEnv CreateVirtualEnv, {
         .\.env\Scripts\activate.ps1
     }
     elseif ($IsLinux) {
-        Exec { ls .env -R -a }
         Exec { .\.env\bin\activate.ps1 }
     }
 }
