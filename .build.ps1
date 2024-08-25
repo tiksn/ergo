@@ -144,7 +144,8 @@ Task RestorePackages Clean, {
         .\.env\Scripts\activate.ps1
     }
     elseif ($IsLinux) {
-        .\.env\bin\activate.ps1
+        Exec { ls .env -R -a }
+        Exec { .\.env\bin\activate.ps1 }
     }
 
     Exec { python -m pip install --upgrade pip }
@@ -152,11 +153,11 @@ Task RestorePackages Clean, {
 }
 
 # Synopsis: Clean previous build leftovers
-Task Clean Init, {
+Task Clean ActivateVirtualEnv, {
     Get-ChildItem -Directory
     | Where-Object { -not $_.Name.StartsWith('.') }
     | ForEach-Object { Get-ChildItem -Path $_ -Recurse -Directory }
-    | Where-Object { ( $_.Name -eq 'bin') -or ( $_.Name -eq 'obj') }
+    | Where-Object { ( $_.Name -eq '__pycache__') }
     | ForEach-Object { Remove-Item -Path $_ -Recurse -Force }
 }
 
@@ -166,12 +167,14 @@ Task ActivateVirtualEnv CreateVirtualEnv, {
         .\.env\Scripts\activate.ps1
     }
     elseif ($IsLinux) {
-        .\.env\bin\activate.ps1
+        Exec { ls .env -R -a }
+        Exec { .\.env\bin\activate.ps1 }
     }
 }
 
 # Synopsis: Create Virtual Environment
 Task CreateVirtualEnv Init, {
+    Exec { pip install virtualenv }
     Exec { virtualenv .env }
 }
 
