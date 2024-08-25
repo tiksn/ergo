@@ -79,6 +79,15 @@ services:
     volumes:
       - fusionauth_config:/usr/local/fusionauth/config
 
+  ergo:
+    image: tiksn/ergo:latest
+    depends_on:
+      fusionauth:
+        condition: service_healthy
+    environment:
+      FUSIONAUTH_API_KEY: 90d8fb62-6f13-47d4-8ef6-1c3e687883c6
+      FUSIONAUTH_URL: https://sandbox.fusionauth.io/
+
 networks:
   db_net:
     driver: bridge
