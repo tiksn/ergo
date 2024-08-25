@@ -1,0 +1,11 @@
+###
+GET https://sandbox.fusionauth.io/api/application
+Authorization: 90d8fb62-6f13-47d4-8ef6-1c3e687883c6
+
+###
+GET https://sandbox.fusionauth.io/api/application/111a9e02-2968-5520-b05b-2beba20cbaef
+Authorization: 90d8fb62-6f13-47d4-8ef6-1c3e687883c6
+
+###
+GET https://sandbox.fusionauth.io/api/application/60445ced-c26b-5bdd-8aca-8ec3be8a2e25
+Authorization: 90d8fb62-6f13-47d4-8ef6-1c3e687883c6
