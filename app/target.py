@@ -4,8 +4,8 @@ import uuid
 from fusionauth.fusionauth_client import FusionAuthClient
 
 
-def populate_target(api_key: str, companies, applications):
-    client = FusionAuthClient(api_key, 'https://sandbox.fusionauth.io/')
+def populate_target(api_key: str, base_url: str, companies, applications):
+    client = FusionAuthClient(api_key, base_url)
 
     group_names = ['Administrators']
     administrator_role_name = 'administrator'
