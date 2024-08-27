@@ -17,6 +17,8 @@ def populate_target(api_key: str, base_url: str, companies, applications):
     for _, company in companies.items():
         create_or_update_tenant(client, company, main_key_id)
 
+    create_or_update_admin_users(client)
+
     for _, company in companies.items():
         client.set_tenant_id(str(company['id']))
         administrator_role_ids = []
@@ -52,12 +54,37 @@ def populate_target(api_key: str, base_url: str, companies, applications):
                 for idiom_name, idiom_info in idioms.items():
                     application_id = uuid.uuid5(company['id'], f"application-{application_name}-{idiom_name}")
 
-                    create_or_update_registration(client, company['id'], employee['id'], application_id)
+                    create_or_update_registration(client, company['id'], employee['id'], application_id, [])
 
             for group_name in group_names:
                 group_id = uuid.uuid5(company['id'], f"group-{group_name}")
 
                 create_or_update_members(client, group_id, employee)
+
+
+def create_or_update_admin_users(client):
+    default_tenant_id = uuid.UUID('4be75029-1365-d0e4-0bb8-34c58aac6745')
+    default_application_id = uuid.UUID('3c219e58-ed0e-4b18-ad48-f4f92793ae32')
+    global_admin_role_name = "admin"
+    default_tenant_user_1_id = uuid.UUID('104ec185-c7a7-4601-9102-5e1feaa20d36')
+    default_tenant_admin_users = {
+        default_tenant_user_1_id: {
+            "id": default_tenant_user_1_id,
+            "username": "tiksn",
+            "email": "tigran.torosyan@tiksn.am",
+            "is_administrator": True,
+            "mobile_phone": "+15559374192",
+            "first_name": "Tigran",
+            "middle_name": "",
+            "last_name": "Torosyan",
+            "full_name": "Tigran Torosyan",
+        }
+    }
+    client.set_tenant_id(str(default_tenant_id))
+    for _, employee in default_tenant_admin_users.items():
+        create_or_update_user(client, default_tenant_id, employee)
+        create_or_update_registration(client, default_tenant_id, employee['id'], default_application_id,
+                                      [global_admin_role_name])
 
 
 def create_or_update_members(client: FusionAuthClient,
@@ -84,8 +111,8 @@ def create_or_update_members(client: FusionAuthClient,
 def create_or_update_registration(client: FusionAuthClient,
                                   company_id: uuid.UUID,
                                   user_id: uuid.UUID,
-                                  application_id: uuid.UUID):
-    roles = []
+                                  application_id: uuid.UUID,
+                                  roles: []):
     registration_request = {
         'skipRegistrationVerification': True,
         'registration': {
