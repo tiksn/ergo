@@ -14,6 +14,8 @@ services:
       retries: 5
     networks:
       - db_net
+    ports:
+      - 5432:5432
     restart: unless-stopped
     volumes:
       - db_data:/var/lib/postgresql/data
@@ -65,6 +67,7 @@ services:
       FUSIONAUTH_APP_URL: http://fusionauth:9011
       SEARCH_SERVERS: http://search:9200
       SEARCH_TYPE: elasticsearch
+      FUSIONAUTH_APP_KICKSTART_FILE: /usr/local/fusionauth/kickstart/kickstart.json
     healthcheck:
       test: curl --silent --fail http://localhost:9011/api/status -o /dev/null -w "%{http_code}"
       interval: 5s
@@ -73,11 +76,13 @@ services:
     networks:
       - db_net
       - search_net
+      - fusionauth_net
     restart: unless-stopped
     ports:
       - 9011:9011
     volumes:
       - fusionauth_config:/usr/local/fusionauth/config
+      - ./kickstart:/usr/local/fusionauth/kickstart
 
   ergo:
     image: tiksn/ergo:latest
@@ -85,13 +90,19 @@ services:
       fusionauth:
         condition: service_healthy
     environment:
-      FUSIONAUTH_API_KEY: 90d8fb62-6f13-47d4-8ef6-1c3e687883c6
-      FUSIONAUTH_BASE_URL: https://sandbox.fusionauth.io/
+      # FUSIONAUTH_API_KEY: 90d8fb62-6f13-47d4-8ef6-1c3e687883c6
+      # FUSIONAUTH_BASE_URL: https://sandbox.fusionauth.io/
+      FUSIONAUTH_API_KEY: 047a124c-2dbc-4b68-84cc-55f9a204f4ea
+      FUSIONAUTH_BASE_URL: http://fusionauth:9011/
+    networks:
+      - fusionauth_net
 
 networks:
   db_net:
     driver: bridge
   search_net:
+    driver: bridge
+  fusionauth_net:
     driver: bridge
 
 volumes:
