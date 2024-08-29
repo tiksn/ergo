@@ -6,6 +6,18 @@ from faker.providers import company
 import logging
 
 
+def populate_company_slugs(companies):
+    company_slugs = set({})
+    for company_id, company in companies.items():
+        company_name = company["name"]
+        company_slug = "".join(e[0] for e in company_name.replace("-", " ").split()).lower()
+        company["slug"] = company_slug
+        if company_slug in company_slugs:
+            raise Exception(F"Slug {company_slug} was already populated")
+        else:
+            company_slugs.add(company_slug)
+
+
 def generate_fake_companies():
     fake = Faker()
     fake.add_provider(company)
@@ -71,5 +83,7 @@ def generate_fake_companies():
             }
 
             logging.info(f"{employee_index + 1}: {{{employee_id}}} {employee_full_name} <{employee_email}>")
+
+    populate_company_slugs(companies)
 
     return companies

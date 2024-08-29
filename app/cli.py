@@ -21,7 +21,9 @@ def main():
         'Fossa': {
             'Web': {
                 'RedirectURLs': [
-                    'http://127.0.0.1/web-app',
+                    'http://*.localtest.me:4210/',
+                    'http://*.dev.localtest.me:4211/',
+                    'http://*.test.localtest.me:4212/'
                 ]
             },
             'Native': {
@@ -33,7 +35,9 @@ def main():
         'Verdant': {
             'Web': {
                 'RedirectURLs': [
-                    'http://127.0.0.1/web-app',
+                    'http://*.localtest.me:4220/',
+                    'http://*.dev.localtest.me:4221/',
+                    'http://*.test.localtest.me:4222/'
                 ]
             },
             'Native': {
@@ -45,7 +49,9 @@ def main():
         'Yabby': {
             'Web': {
                 'RedirectURLs': [
-                    'http://127.0.0.1/web-app',
+                    'http://*.localtest.me:4230/',
+                    'http://*.dev.localtest.me:4231/',
+                    'http://*.test.localtest.me:4232/'
                 ]
             },
             'Native': {

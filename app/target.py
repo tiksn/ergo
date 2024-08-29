@@ -207,7 +207,7 @@ def create_or_update_application(client: FusionAuthClient,
                                  administrator_role_id: uuid.UUID,
                                  administrator_role_name: str):
     application_display_name = f"{application_name} ({idiom_name})"
-    redirectURLs = idiom_info['RedirectURLs']
+    redirectURLs = [redirectUrl.replace("*", company['slug']) for redirectUrl in idiom_info['RedirectURLs']]
 
     application_request = {
         'application': {
