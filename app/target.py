@@ -207,7 +207,8 @@ def create_or_update_application(client: FusionAuthClient,
                                  administrator_role_id: uuid.UUID,
                                  administrator_role_name: str):
     application_display_name = f"{application_name} ({idiom_name})"
-    redirectURLs = [redirectUrl.replace("*", company['slug']) for redirectUrl in idiom_info['RedirectURLs']]
+    redirectURLs = [redirectUrl.replace("*", company['slug']) for redirectUrl in idiom_info['RedirectUrlTemplates']]
+    originURLs = [originUrl.replace("*", company['slug']) for originUrl in idiom_info['OriginUrlTemplates']]
 
     application_request = {
         'application': {
@@ -223,6 +224,7 @@ def create_or_update_application(client: FusionAuthClient,
             ],
             'oauthConfiguration': {
                 'authorizedRedirectURLs': redirectURLs,
+                'authorizedOriginURLs': originURLs,
                 'generateRefreshTokens': True,
                 'proofKeyForCodeExchangePolicy': 'Required',
                 'enabledGrants': ['authorization_code', 'refresh_token'],

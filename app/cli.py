@@ -20,43 +20,67 @@ def main():
     applications = {
         'Fossa': {
             'Web': {
-                'RedirectURLs': [
+                'RedirectUrlTemplates': [
                     'http://*.localtest.me:4210/',
                     'http://*.dev.localtest.me:4211/',
                     'http://*.test.localtest.me:4212/'
+                ],
+                'OriginUrlTemplates': [
+                    'http://*.localtest.me:4210',
+                    'http://*.dev.localtest.me:4211',
+                    'http://*.test.localtest.me:4212'
                 ]
             },
             'Native': {
-                'RedirectURLs': [
+                'RedirectUrlTemplates': [
                     'http://127.0.0.1/native-app',
+                ],
+                'OriginUrlTemplates': [
+                    'http://127.0.0.1',
                 ]
             },
         },
         'Verdant': {
             'Web': {
-                'RedirectURLs': [
+                'RedirectUrlTemplates': [
                     'http://*.localtest.me:4220/',
                     'http://*.dev.localtest.me:4221/',
                     'http://*.test.localtest.me:4222/'
+                ],
+                'OriginUrlTemplates': [
+                    'http://*.localtest.me:4220',
+                    'http://*.dev.localtest.me:4221',
+                    'http://*.test.localtest.me:4222'
                 ]
             },
             'Native': {
-                'RedirectURLs': [
+                'RedirectUrlTemplates': [
                     'http://127.0.0.1/native-app',
+                ],
+                'OriginUrlTemplates': [
+                    'http://127.0.0.1',
                 ]
             },
         },
         'Yabby': {
             'Web': {
-                'RedirectURLs': [
+                'RedirectUrlTemplates': [
                     'http://*.localtest.me:4230/',
                     'http://*.dev.localtest.me:4231/',
                     'http://*.test.localtest.me:4232/'
+                ],
+                'OriginUrlTemplates': [
+                    'http://*.localtest.me:4230',
+                    'http://*.dev.localtest.me:4231',
+                    'http://*.test.localtest.me:4232'
                 ]
             },
             'Native': {
-                'RedirectURLs': [
+                'RedirectUrlTemplates': [
                     'http://127.0.0.1/native-app',
+                ],
+                'OriginUrlTemplates': [
+                    'http://127.0.0.1',
                 ]
             },
         },
