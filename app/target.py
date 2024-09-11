@@ -67,6 +67,7 @@ def create_or_update_admin_users(client):
     default_application_id = uuid.UUID('3c219e58-ed0e-4b18-ad48-f4f92793ae32')
     global_admin_role_name = "admin"
     default_tenant_user_1_id = uuid.UUID('104ec185-c7a7-4601-9102-5e1feaa20d36')
+    default_tenant_user_2_id = uuid.UUID('1dbaa896-b27f-4888-9b55-4d172f71a80b')
     default_tenant_admin_users = {
         default_tenant_user_1_id: {
             "id": default_tenant_user_1_id,
@@ -75,9 +76,20 @@ def create_or_update_admin_users(client):
             "is_administrator": True,
             "mobile_phone": "+15559374192",
             "first_name": "Tigran",
-            "middle_name": "",
+            "middle_name": "TIKSN",
             "last_name": "Torosyan",
-            "full_name": "Tigran Torosyan",
+            "full_name": "Tigran TIKSN Torosyan",
+        },
+        default_tenant_user_2_id: {
+            "id": default_tenant_user_2_id,
+            "username": "ashotnazaryan",
+            "email": "ashot@nazaryan.am",
+            "is_administrator": True,
+            "mobile_phone": "+15559374182",
+            "first_name": "Ashot",
+            "middle_name": "",
+            "last_name": "Nazaryan",
+            "full_name": "Ashot Nazaryan",
         }
     }
     client.set_tenant_id(str(default_tenant_id))
