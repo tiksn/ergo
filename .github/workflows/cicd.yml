@@ -54,7 +54,8 @@ jobs:
         uses: actions/upload-artifact@v4.4.0
         with:
           name: .trash
-          path: "./.trash"
+          path: ".trash"
+          include-hidden-files: true
 
   cd:
     name: CD
@@ -73,8 +74,8 @@ jobs:
       - name: "Download Artefact"
         uses: actions/download-artifact@v4.1.8
         with:
-          name: ".trash"
-          path: "./.trash"
+          name: .trash
+          path: ".trash"
       - name: "Install InvokeBuild Module"
         shell: pwsh
         run: Install-Module -Name InvokeBuild -Force
