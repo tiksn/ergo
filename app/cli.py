@@ -21,9 +21,9 @@ def main():
         'Fossa': {
             'Web': {
                 'RedirectUrlTemplates': [
-                    'http://*.localtest.me:4210/',
-                    'http://*.dev.localtest.me:4211/',
-                    'http://*.test.localtest.me:4212/'
+                    'http://*.localtest.me:4210',
+                    'http://*.dev.localtest.me:4211',
+                    'http://*.test.localtest.me:4212'
                 ],
                 'OriginUrlTemplates': [
                     'http://*.localtest.me:4210',
@@ -43,9 +43,9 @@ def main():
         'Verdant': {
             'Web': {
                 'RedirectUrlTemplates': [
-                    'http://*.localtest.me:4220/',
-                    'http://*.dev.localtest.me:4221/',
-                    'http://*.test.localtest.me:4222/'
+                    'http://*.localtest.me:4220',
+                    'http://*.dev.localtest.me:4221',
+                    'http://*.test.localtest.me:4222'
                 ],
                 'OriginUrlTemplates': [
                     'http://*.localtest.me:4220',
@@ -65,9 +65,9 @@ def main():
         'Yabby': {
             'Web': {
                 'RedirectUrlTemplates': [
-                    'http://*.localtest.me:4230/',
-                    'http://*.dev.localtest.me:4231/',
-                    'http://*.test.localtest.me:4232/'
+                    'http://*.localtest.me:4230',
+                    'http://*.dev.localtest.me:4231',
+                    'http://*.test.localtest.me:4232'
                 ],
                 'OriginUrlTemplates': [
                     'http://*.localtest.me:4230',
