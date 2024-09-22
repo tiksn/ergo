@@ -23,12 +23,18 @@ def main():
                 'RedirectUrlTemplates': [
                     'http://*.localtest.me:4210',
                     'http://*.dev.localtest.me:4211',
-                    'http://*.test.localtest.me:4212'
+                    'http://*.test.localtest.me:4212',
+                    'https://*.localtest.me:4210',
+                    'https://*.dev.localtest.me:4211',
+                    'https://*.test.localtest.me:4212'
                 ],
                 'OriginUrlTemplates': [
                     'http://*.localtest.me:4210',
                     'http://*.dev.localtest.me:4211',
-                    'http://*.test.localtest.me:4212'
+                    'http://*.test.localtest.me:4212',
+                    'https://*.localtest.me:4210',
+                    'https://*.dev.localtest.me:4211',
+                    'https://*.test.localtest.me:4212'
                 ]
             },
             'Native': {
@@ -45,12 +51,18 @@ def main():
                 'RedirectUrlTemplates': [
                     'http://*.localtest.me:4220',
                     'http://*.dev.localtest.me:4221',
-                    'http://*.test.localtest.me:4222'
+                    'http://*.test.localtest.me:4222',
+                    'https://*.localtest.me:4220',
+                    'https://*.dev.localtest.me:4221',
+                    'https://*.test.localtest.me:4222'
                 ],
                 'OriginUrlTemplates': [
                     'http://*.localtest.me:4220',
                     'http://*.dev.localtest.me:4221',
-                    'http://*.test.localtest.me:4222'
+                    'http://*.test.localtest.me:4222',
+                    'https://*.localtest.me:4220',
+                    'https://*.dev.localtest.me:4221',
+                    'https://*.test.localtest.me:4222'
                 ]
             },
             'Native': {
@@ -67,12 +79,18 @@ def main():
                 'RedirectUrlTemplates': [
                     'http://*.localtest.me:4230',
                     'http://*.dev.localtest.me:4231',
-                    'http://*.test.localtest.me:4232'
+                    'http://*.test.localtest.me:4232',
+                    'https://*.localtest.me:4230',
+                    'https://*.dev.localtest.me:4231',
+                    'https://*.test.localtest.me:4232'
                 ],
                 'OriginUrlTemplates': [
                     'http://*.localtest.me:4230',
                     'http://*.dev.localtest.me:4231',
-                    'http://*.test.localtest.me:4232'
+                    'http://*.test.localtest.me:4232',
+                    'https://*.localtest.me:4230',
+                    'https://*.dev.localtest.me:4231',
+                    'https://*.test.localtest.me:4232'
                 ]
             },
             'Native': {
