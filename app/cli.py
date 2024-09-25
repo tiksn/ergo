@@ -35,7 +35,8 @@ def main():
                     'http://*.localhost:4210',
                     'http://*.dev.localhost:4211',
                     'http://*.test.localhost:4212'
-                ]
+                ],
+                'IsClientAuthenticationRequired': False,
             },
             'Native': {
                 'RedirectUrlTemplates': [
@@ -43,7 +44,8 @@ def main():
                 ],
                 'OriginUrlTemplates': [
                     'http://127.0.0.1',
-                ]
+                ],
+                'IsClientAuthenticationRequired': True,
             },
         },
         'Verdant': {
@@ -63,7 +65,8 @@ def main():
                     'http://*.localhost:4220',
                     'http://*.dev.localhost:4221',
                     'http://*.test.localhost:4222'
-                ]
+                ],
+                'IsClientAuthenticationRequired': False,
             },
             'Native': {
                 'RedirectUrlTemplates': [
@@ -71,7 +74,8 @@ def main():
                 ],
                 'OriginUrlTemplates': [
                     'http://127.0.0.1',
-                ]
+                ],
+                'IsClientAuthenticationRequired': True,
             },
         },
         'Yabby': {
@@ -91,7 +95,8 @@ def main():
                     'http://*.localhost:4230',
                     'http://*.dev.localhost:4231',
                     'http://*.test.localhost:4232'
-                ]
+                ],
+                'IsClientAuthenticationRequired': False,
             },
             'Native': {
                 'RedirectUrlTemplates': [
@@ -99,7 +104,8 @@ def main():
                 ],
                 'OriginUrlTemplates': [
                     'http://127.0.0.1',
-                ]
+                ],
+                'IsClientAuthenticationRequired': True,
             },
         },
     }
