@@ -22,9 +22,13 @@ def main():
             'Web': {
                 'RedirectUrlTemplates': [
                     'http://*.localhost:4210',
+                    'http://*.localhost:4210/callback',
                     'http://*.dev.localhost:4211',
+                    'http://*.dev.localhost:4211/callback',
                     'http://*.test.localhost:4210',
-                    'http://*.test.localhost:4211'
+                    'http://*.test.localhost:4210/callback',
+                    'http://*.test.localhost:4211',
+                    'http://*.test.localhost:4211/callback'
                 ],
                 'OriginUrlTemplates': [
                     'http://*.localhost:4210',
