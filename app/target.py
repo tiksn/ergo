@@ -56,6 +56,12 @@ def populate_target(api_key: str, base_url: str, companies, applications):
 
                     create_or_update_registration(client, company['id'], employee['id'], application_id, [])
 
+    for _, company in companies.items():
+        client.set_tenant_id(str(company['id']))
+
+        logging.info(company['name'])
+
+        for _, employee in company['employees'].items():
             for group_name in group_names:
                 group_id = uuid.uuid5(company['id'], f"group-{group_name}")
 
@@ -115,7 +121,11 @@ def create_or_update_members(client: FusionAuthClient,
 
         create_members_response = client.create_group_members(members_request)
         if create_members_response.was_successful():
-            logging.info(create_members_response.success_response)
+            # logging.info(create_members_response.success_response)
+            logging.info({
+                'email': employee['email'],
+                'full_name': employee['full_name']
+            })
         else:
             logging.error(create_members_response.error_response)
 
