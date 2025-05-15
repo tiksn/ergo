@@ -1,2 +1,2 @@
-Faker==37.1.0
+Faker==37.3.0
 fusionauth-client==1.57.0
