@@ -1,2 +1,2 @@
 Faker==40.11.0
-fusionauth-client==1.63.0
+fusionauth-client==1.64.0
